@@ -4,10 +4,6 @@ This project is an example of using a client and server to facilitate transfers 
 
 However, something that we would like to incoporate is Public Key Cryptography. By using Elliptic Curve Digital Signatures we can make it so the server only allows transfers that have been signed for by the person who owns the associated address.
 
-### Video instructions
-For an overview of this project as well as getting started instructions, check out the following video:
-
-https://www.loom.com/share/0d3c74890b8e44a5918c4cacb3f646c4
  
 ### Client
 
@@ -29,3 +25,14 @@ The server folder contains a node.js server using [express](https://expressjs.co
 The application should connect to the default server port (3042) automatically! 
 
 _Hint_ - Use [nodemon](https://www.npmjs.com/package/nodemon) instead of `node` to automatically restart the server on any changes.
+
+### changes made 
+
+1. Generate a random wallet in frontend and save the eth address in the backend with amount
+2. Everytime a user wants to send a transaction
+	- Sign the transaction with private key (private key is temporary and will be lost with every reload)
+	- Recover the public address from the signature(signature.recoverPublicKey(msgHash))
+	- Send the `messageHash`, `public address` and `signature` to the backend
+	- verify the signature with public address using secp256k1
+	- derive eth address from the public address
+	- check for existing of the eth address and do the plus minus operation
